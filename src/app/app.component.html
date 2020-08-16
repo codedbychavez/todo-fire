@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container p-4">
+      <h1 class="display-4">todo<i class="fa fa-fire text-warning" aria-hidden="true"></i>fire </h1>
+      <p class="lead">Combined with the power of the Angular front-end framework and Google's Firestore... <br/> <strong>todo<i class="fa fa-fire text-warning" aria-hidden="true"></i>fire</strong> allows you to manage your todo tasks in realtime.</p>
+      <p class="float-right lead">
+        Today: {{date | date: "dd-mm-yyyy"}}
+      </p>
+    </div>
+  </div>
+<form #form="ngForm">
+  <div class="form-group">
+  <input [(ngModel)]="myTask" name="myTask" type="text" class="form-control" placeholder="Enter Task" required>
+  </div>
+  <p *ngIf="loading">
+     <i class="fa fa-spinner fa-spin"></i>
+  </p>
+  <div class="form-group">
+   <button class="btn btn-warning" [disabled]="!form.valid" (click)="saveTask()">
+     Save Task
+   </button>
+  </div>
+</form>
+
+<h3>Tasks</h3>
+<div *ngFor="let task of tasks | async; let i = index" [attr.data-index]="i">
+  <div class="card m-4">
+    <div class="card-body">
+      <span class="mr-4"><input type="checkbox" [checked]="task.completed == true" (change)="updateCompletedStatus($event,task)"></span>
+      <span [ngClass]="{'strike-through' : task.completed == true}"> {{task.description}} </span>
+      <span class="btn btn-sm btn-default mr-2 float-right" (click)="edit(task)" matTooltip="Tooltips in Angular"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+      <span class="btn btn-sm btn-default mr-2 float-right" (click)="deleteTask(task)"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+    </div>
+  </div>
+</div>
+
+</div>
+

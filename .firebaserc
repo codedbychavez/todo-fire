@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angulartodo-26e80": {
+      "hosting": {
+        "angularfire": [
+          "angulartodo-26e80"
+        ]
+      }
+    }
+  }
+}
