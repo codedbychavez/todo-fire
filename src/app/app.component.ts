@@ -1,3 +1,4 @@
+// app.component.ts
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -12,8 +13,6 @@ import { Task } from './app.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'angularfire';
-  date: Date;
 
   tasks: Observable<any[]>;
   myTask: string;
@@ -21,9 +20,6 @@ export class AppComponent implements OnInit {
   taskToEdit: any = {};
 
   constructor(public db: AngularFirestore, private taskService: TaskService) {
-    setInterval(() => {
-      this.date = new Date()
-    }, 1000)
   }
 
   ngOnInit(): void {
@@ -56,6 +52,7 @@ export class AppComponent implements OnInit {
     if (this.myTask !== null) {
        // retrieve the input field value
        let task = {
+          completed: false,
           description: this.myTask
        };
        if (!this.editMode) {
